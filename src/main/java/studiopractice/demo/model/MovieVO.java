@@ -1,5 +1,6 @@
 package studiopractice.demo.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -17,7 +18,10 @@ public class MovieVO
     private @Getter @Setter long id;
     private @Getter @Setter String name;
     private @Getter @Setter String genre;
-    private @Getter @Setter int open_date;
-    private @Getter @Setter int end_date;
-    private @Getter @Setter int is_open;
+    @Column(name = "open_date")
+    private @Getter @Setter int openDate;
+    @Column(name = "end_date")
+    private @Getter @Setter int endDate;
+    @Column(name = "is_open")
+    private @Getter @Setter int isOpen;
 }
