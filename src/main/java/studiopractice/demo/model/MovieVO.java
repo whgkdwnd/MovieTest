@@ -24,4 +24,6 @@ public class MovieVO
     private @Getter @Setter int endDate;
     @Column(name = "is_open")
     private @Getter @Setter int isOpen;
+    @Column(name = "is_delete")
+    private @Getter @Setter int isDelete;
 }

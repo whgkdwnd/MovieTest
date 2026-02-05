@@ -21,19 +21,18 @@ public class GetController {
             @RequestParam(required = false) Integer is_open) {
         List<MovieVO> movievo;
         if(gerne == null && is_open == null){
-            movievo = movieRepository.findAll();
+            movievo = movieRepository.findByIsDelete(0);
         }
         else if(gerne == null && is_open != null){
-            System.out.println(is_open);
-            movievo = movieRepository.findByIsOpen(is_open);
+            movievo = movieRepository.findByIsOpen(is_open,0);
         }
         else if(gerne != null && is_open == null){
-            movievo = movieRepository.findByGenre(gerne);
+            movievo = movieRepository.findByGenre(gerne,0);
         }
         else{
-            movievo = movieRepository.findByGenreAndIsOpen(gerne, is_open);
+            movievo = movieRepository.findByGenreAndIsOpen(gerne, is_open,0);
         }
-        movievo.sort(Comparator.comparingInt(MovieVO::getOpen_date));
+        movievo.sort(Comparator.comparing(MovieVO::getOpenDate));
         return movievo;
     }
 }
