@@ -1,10 +1,13 @@
 package studiopractice.demo.Controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.beans.BeanUtils;
 import studiopractice.demo.model.MovieVO;
+import studiopractice.demo.model.MovieVOForEdit;
 import studiopractice.demo.repository.MovieRepository;
 
 import java.util.Comparator;
@@ -34,5 +37,13 @@ public class GetController {
         }
         movievo.sort(Comparator.comparing(MovieVO::getOpenDate));
         return movievo;
+    }
+
+    @RequestMapping("/{id}")
+    public MovieVOForEdit getMovieById(@PathVariable("id") long id){
+        MovieVO entity = movieRepository.findById(id).orElseThrow();
+        MovieVOForEdit response = new MovieVOForEdit();
+        BeanUtils.copyProperties(entity, response);
+        return response;
     }
 }
